@@ -3,7 +3,7 @@ name: Deploy to S3 and Amplify
 on:
   push:
     branches:
-      - main  # Adjust as necessary
+      - main
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: AKIATQPD64S5E5YMKE63
-          aws-secret-access-key: ${{ secrets.AWS_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
       - name: Sync files to S3
@@ -27,16 +27,29 @@ jobs:
       - name: Create Amplify Deployment
         id: amplify-deploy
         run: |
+          echo "Running create-deployment..."
+          # Print raw output to debug
+          aws amplify create-deployment \
+            --region us-east-2 \
+            --app-id d2fc5rd97478n5 \
+            --branch-name staging
+
+          echo "Now capturing DEPLOYMENT_ID..."
           DEPLOYMENT_ID=$(aws amplify create-deployment \
+            --region us-east-2 \
             --app-id d2fc5rd97478n5 \
             --branch-name staging \
             --query 'jobSummary.jobId' \
             --output text)
+          
+          echo "DEPLOYMENT_ID=$DEPLOYMENT_ID"
           echo "DEPLOYMENT_ID=$DEPLOYMENT_ID" >> $GITHUB_ENV
 
       - name: Start Amplify Deployment
         run: |
+          echo "Starting deployment with DEPLOYMENT_ID=${{ env.DEPLOYMENT_ID }}"
           aws amplify start-deployment \
+            --region us-east-2 \
             --app-id d2fc5rd97478n5 \
             --branch-name staging \
             --job-id ${{ env.DEPLOYMENT_ID }}
