@@ -1,32 +1,42 @@
-name: Deploy to S3
+name: Deploy to S3 and Amplify
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - main  # Adjust as necessary
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: AKIATQPD64S5E5YMKE63
-        aws-secret-access-key: ${{ secrets.AWS_ID }}
-        aws-region: us-east-2
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: AKIATQPD64S5E5YMKE63
+          aws-secret-access-key: ${{ secrets.AWS_ID }}
+          aws-region: us-east-2
 
-    - name: Sync files to S3
-      run: |
-        aws s3 sync . s3://husnamanalai.com --delete --region us-east-2
+      - name: Sync files to S3
+        run: |
+          aws s3 sync . s3://husnamanalai.com --delete --region us-east-2
 
-    - name: Trigger AWS Amplify deployment
-      run: |
-        aws amplify start-job \
-          --app-id d2fc5rd97478n5 \
-          --branch-name main \
-          --job-type RELEASE
+      - name: Create Amplify Deployment
+        id: amplify-deploy
+        run: |
+          DEPLOYMENT_ID=$(aws amplify create-deployment \
+            --app-id d2fc5rd97478n5 \
+            --branch-name main \
+            --query 'jobSummary.jobId' \
+            --output text)
+          echo "DEPLOYMENT_ID=$DEPLOYMENT_ID" >> $GITHUB_ENV
+
+      - name: Start Amplify Deployment
+        run: |
+          aws amplify start-deployment \
+            --app-id d2fc5rd97478n5 \
+            --branch-name main \
+            --job-id ${{ env.DEPLOYMENT_ID }}
