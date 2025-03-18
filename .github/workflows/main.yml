@@ -29,7 +29,7 @@ jobs:
         run: |
           DEPLOYMENT_ID=$(aws amplify create-deployment \
             --app-id d2fc5rd97478n5 \
-            --branch-name main \
+            --branch-name staging \
             --query 'jobSummary.jobId' \
             --output text)
           echo "DEPLOYMENT_ID=$DEPLOYMENT_ID" >> $GITHUB_ENV
@@ -38,5 +38,5 @@ jobs:
         run: |
           aws amplify start-deployment \
             --app-id d2fc5rd97478n5 \
-            --branch-name main \
+            --branch-name staging \
             --job-id ${{ env.DEPLOYMENT_ID }}
