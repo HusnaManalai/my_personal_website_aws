@@ -74,4 +74,99 @@ document.getElementById("stop-timer").addEventListener("click", function () {
   }
   
 
+//ANIMATION SECTION
 
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+  
+    // Hero Section Animation
+    gsap.from(".hero-content h1", {
+      opacity: 0,
+      y: -50,
+      duration: 1.2,
+      ease: "power2.out",
+    });
+  
+    gsap.from(".hero-content .logo-text", {
+      opacity: 0,
+      x: -100,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+  
+    gsap.from(".social-icons a", {
+      opacity: 0,
+      scale: 0.8,
+      stagger: 0.2,
+      duration: 1,
+      ease: "elastic.out(1, 0.5)",
+    });
+  
+    // About Section Scroll Animation
+    gsap.from(".about-section", {
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".about-section",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  
+    // Mind-Blowing Staggered Effect for Text
+    gsap.from(".about-content p", {
+      opacity: 0,
+      y: 30,
+      stagger: 0.3,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".about-content",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  
+    // Parallax Effect for Stars (if you have background stars)
+    gsap.to("#stars-container", {
+      yPercent: -10,
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
+  
+    // Scroll Animation for Projects Section
+    gsap.from(".workspace", {
+      opacity: 0,
+      scale: 1.0,
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".workspace",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+  
+  });
+  
+ 
+
+
+
+  gsap.from(".hero-content", {
+    opacity: 0,
+    rotateX: 15,
+    scale: 0.95,
+    duration: 1.5,
+    ease: "power3.out",
+  });
+
+
+ 

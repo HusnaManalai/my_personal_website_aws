@@ -6,21 +6,22 @@
   margin: 0;
   box-sizing: border-box;
 }
-body {
+html {
     position: relative;
     height: 100%;
     display: flex;
     flex-direction: column;
-    font-family: 'Poppins', sans-serif;
-    background: rgb(9, 15, 38);
-    color: rgb(88, 254, 188);
+    font-family: "Fira Code", "Flate", monospace; 
+    background: rgb(3, 14, 26);
+    color: rgb(59, 168, 143);
     scroll-behavior: smooth; /* Smooth scrolling for anchor links */
 }
+
 
 h2 {
     font-size: 2rem; /* Set your desired size */
     font-weight: 700; /* Ensures all headings have the same weight */
-    color: rgb(88, 254, 188); /* Keeps color consistent */
+    color: rgb(59, 168, 143); /* Keeps color consistent */
     text-transform: uppercase; /* Optional: Makes headings all caps */
     margin-bottom: 1rem; /* Adds uniform spacing */
   }
@@ -45,7 +46,7 @@ h2 {
     position: absolute;
     width: 2px;
     height: 2px;
-    background: rgb(88, 254, 188);
+    background: rgb(59, 168, 143);
     border-radius: 50%;
     animation: blink infinite ease-in-out;
     animation-duration: 4s;
@@ -71,14 +72,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 12rem;
 }
 a {
     text-decoration: none; /* Removes underlines from all links */
   }
 .logo a {
   text-decoration: none;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-size: 2rem;
   font-weight: bold;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -96,7 +97,7 @@ a {
 }
 
 .navbar .nav-links li a {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-size: 1rem;
   font-weight: 400;
   transition: color 0.6s;
@@ -122,17 +123,19 @@ a {
 }
 
 .hero-content .highlight {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
 }
 
 .hero-content .highlight-alt {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
 }
 
 .hero-content .big {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-size: 3.5rem;
 }
+
+
 
 .social-icons {
   display: flex;
@@ -165,8 +168,8 @@ a {
   .buttons .primary,
   .buttons .secondary {
     background: transparent;
-    border: 2px solid rgb(88, 254, 188);
-    color: rgb(88, 254, 188);
+    border: 1px solid rgb(59, 168, 143);
+    color: rgb(59, 168, 143);
   }
   
   .buttons .primary:hover,
@@ -199,9 +202,7 @@ a {
   position: relative;
   width: 60%;
   max-width: 600px;
-  border-radius: 20%;
-  box-shadow: 0 0 0 2px rgb(88, 254, 188);
-  padding: 2px;
+  padding: 6px;
   animation: moveRandomly 50s infinite alternate ease-in-out;
 }
 
@@ -234,18 +235,23 @@ a {
     flex-direction: column;
     text-align: center;
     padding-left: 0;
+    perspective: 1000px;
   }
   .hero-content {
     max-width: 100%;
+    transform-style: preserve-3d;
   }
 }
+
+
+  
 
 
 /* -----------------------------------
    FOOTER STYLING
 ----------------------------------- */
 .footer {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   text-align: center;
   padding: 0.1rem 0;
   font-size: 0.6rem;
@@ -270,7 +276,7 @@ a {
 .contact-section {
   padding: 4rem 2rem;
   text-align: center;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
 }
 
 .contact-section p {
@@ -303,7 +309,7 @@ a {
   width: 100%;
   padding: 0.8rem;
   font-size: 1rem;
-  border: 1px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   color: #000;
@@ -328,19 +334,21 @@ a {
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: rgb(88, 254, 188);
-  box-shadow: 0 0 5px rgb(88, 254, 188);
+  border-color: rgb(59, 168, 143);
+  box-shadow: 0 0 5px rgb(59, 168, 143);
 }
 
 /* -----------------------------------
    ABOUT SECTION
 ----------------------------------- */
 .about-section {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  padding: 0.1rem 1rem;
+  margin-top: 30px;
+  margin-bottom: 2px;
+  line-height: 1.6;
+  font-family: "Fira Code", "Flate", monospace; 
+  padding: 0s.1rem 1rem;
   text-align: center;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
 }
 
 .about-container {
@@ -366,16 +374,17 @@ a {
 }
 
 .about-content h2 {
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
 }
 
 .about-content p {
   font-size: 1.2rem;
   line-height: 1.5;
+  margin-bottom: 1.5rem;
 }
 
 .highlight-link{
-    color: rgb(94, 236, 255);
+    color: rgb(255, 255, 255);
 }
 
 /* -----------------------------------
@@ -407,11 +416,11 @@ a {
   align-items: center;
   padding: 5rem;
   max-width: 900px;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   border-radius: 15%;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   text-align: center;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .workspace h2 {
@@ -444,7 +453,7 @@ a {
 .task-input input {
   width: 200px;
   padding: 0.8rem;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   border-radius: 5px;
   font-size: 1rem;
   background: transparent;
@@ -453,9 +462,9 @@ a {
 
 .task-input button {
   padding: 0.8rem 1.5rem;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   background-color: transparent;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-weight: bold;
   cursor: pointer;
 }
@@ -468,12 +477,13 @@ a {
   padding-left: 0;
   list-style: none;
   margin-top: 1rem;
+  color:#ffffff
 }
 
 #task-list li {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   border-radius: 5px;
   margin-bottom: 0.5rem;
   text-align: center;
@@ -486,25 +496,26 @@ a {
 #task-list li button {
   background: none;
   border: none;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-size: 1rem;
   cursor: pointer;
 }
 
 .focus-timer {
   padding: 0.5rem;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   border-radius: 5px;
   text-align: center;
 }
 
 #timer-display {
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
   background-color: transparent;
   border-radius: 5px;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
+  color: #ffffff;
 }
 
 .focus-timer button {
@@ -512,11 +523,11 @@ a {
   margin: 0.5rem;
   border: none;
   background-color: transparent;
-  color: rgb(88, 254, 188);
+  color: rgb(59, 168, 143);
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
 }
 
 .focus-timer button:hover {
@@ -526,7 +537,7 @@ a {
 .brain-dump {
   flex: 1;
   text-align: center;
-  border: 2px solid rgb(88, 254, 188);
+  border: 1px solid rgb(59, 168, 143);
 }
 
 #brain-dump-input {
@@ -534,7 +545,7 @@ a {
   max-width: 200px;
   height: 155px;
   background-color: transparent;
-  color: rgb(88, 254, 188);
+  color: rgb(255, 255, 255);
   font-size: 1rem;
 }
 
