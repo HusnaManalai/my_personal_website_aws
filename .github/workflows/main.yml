@@ -27,13 +27,7 @@ jobs:
       - name: Create Amplify Deployment
         id: amplify-deploy
         run: |
-          echo "Running create-deployment..."
-          # Print raw output to debug
-          aws amplify create-deployment \
-            --region us-east-2 \
-            --app-id d2fc5rd97478n5 \
-            --branch-name staging
-
+          
           echo "Now capturing DEPLOYMENT_ID..."
           DEPLOYMENT_ID=$(aws amplify create-deployment \
             --region us-east-2 \
