@@ -24,3 +24,9 @@ jobs:
       run: |
         aws s3 sync . s3://husnamanalai.com --delete --region us-east-2
 
+    - name: Trigger AWS Amplify deployment
+      run: |
+        aws amplify start-job \
+          --app-id d2fc5rd97478n5 \
+          --branch-name main \
+          --job-type RELEASE
