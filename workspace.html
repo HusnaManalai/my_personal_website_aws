@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Husna's Digital Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1 class="logo"><a href="index.html">HUSNA MANALAI ⊹</a></h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">BACK TO MAIN PAGE</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="stars-container"></div>
+  <header class="navbar">
+  </header>
+
+    <!--WORKSPACE SECTION-->
+    <main id = "workspace" class="workspace">
+        <h2>Try Workspace!</h2>
+        <p class = "wd">
+          A structured to-do list space designed to help you focus, manage tasks, and stay productive. </p>
+        
+        <div class="workspace-content">
+          <!-- Task Input & Task List -->
+          <div class="tasks">
+            <div class="task-input">
+              <input type="text" id="task-input" placeholder="Enter a task...">
+              <button id="add-task-btn">Add Task</button>
+            </div>
+            <ul id="task-list"></ul>
+          </div>
+      
+          <!-- Focus Timer -->
+          <div class="focus-timer">
+            <h3>Focus Timer</h3>
+            <p id="timer-display">25:00</p>
+            <button id="start-timer">Start</button>
+            <button id="stop-timer">Stop</button> <!-- New Stop Button -->
+            <button id="reset-timer">Reset</button>
+          </div>
+      
+          <!-- Brain-Dump Notes -->
+          <div class="brain-dump">
+            <h3>Quick Notes</h3>
+            <textarea id="brain-dump-input" placeholder="Jot down any thoughts..."></textarea>
+          </div>
+        </div>
+      </main>
+    
+
+   <!-- Link the external JavaScript file -->
+   <script src="particle.js"></script>
+
+
+
+</body>
+</html>
