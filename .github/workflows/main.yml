@@ -32,7 +32,7 @@ jobs:
 
           echo "DEPLOYMENT_INFO=$DEPLOYMENT_INFO"
           JOB_ID=$(echo "$DEPLOYMENT_INFO" | jq -r '.jobId')
-          UPLOAD_URL=$(echo "$DEPLOYMENT_INFO" | jq -r '.uploadUrl')
+          UPLOAD_URL=$(echo "$DEPLOYMENT_INFO" | jq -r '.zipUploadUrl')
 
           # Expose these as environment variables for later steps
           echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
