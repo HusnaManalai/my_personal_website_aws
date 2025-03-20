@@ -1,9 +1,7 @@
 
-
 /* -----------------------------------
    GAMES SECTION (MASONRY LAYOUT)
 ----------------------------------- */
-
 /* Game Section */
 .game-section {
     display: flex;
@@ -64,18 +62,6 @@
 
 /* -----------------------------------
    RIGHT PANEL: LEVEL, TIMER, SCORE
-
-   score doesn't increase when a trio is found
-   the players' scrore doesn't increase 
-
-   after level one is finished the other levels 
-   show the "you win" screen after finiding only the first trio.
-
-   In the home page there should be option to go to different levels
-   
-
-
-
 ----------------------------------- */
 
 
