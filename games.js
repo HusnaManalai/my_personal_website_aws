@@ -23,6 +23,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const player1ScoreDisplay = document.getElementById("player1-score");
     const player2ScoreDisplay = document.getElementById("player2-score");
   
+    const musicToggleBtn = document.getElementById("music-toggle-btn");
+    const bgMusic = new Audio("images/3.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.5;
+    
+    let isMusicPlaying = false; // our own flag
+    
+    musicToggleBtn.addEventListener("click", () => {
+      if (!isMusicPlaying) {
+        bgMusic.play();
+        musicToggleBtn.innerText = "Music Off";
+        isMusicPlaying = true;
+      } else {
+        bgMusic.pause();
+        musicToggleBtn.innerText = "Music On";
+        isMusicPlaying = false;
+      }
+    });
+    
+  
     // Game variables
     let level = 1;
     let matches = 0;
@@ -59,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Start countdown timer
     function startTimer() {
       clearInterval(timer);
-      timeLeft = 3;
+      timeLeft = 20;
       timerDisplay.textContent = timeLeft;
       timer = setInterval(() => {
         timeLeft--;
@@ -77,38 +97,52 @@ document.addEventListener("DOMContentLoaded", () => {
       matches = 0;
       const numCards = (level + 2) * 3;
       const cardValues = [];
-  
+      
       // Create three copies for each unique value
       for (let i = 0; i < numCards / 3; i++) {
         cardValues.push(i, i, i);
       }
-  
       // Shuffle cards
       cardValues.sort(() => Math.random() - 0.5);
+      
       gameBoard.innerHTML = "";
+      // Dynamically adjust the number of columns based on card count:
       gameBoard.style.gridTemplateColumns = `repeat(${Math.ceil(numCards / 3)}, 1fr)`;
   
       cardValues.forEach(value => {
         const card = document.createElement("div");
         card.classList.add("card");
+        // Store the card face image path in dataset
         card.dataset.value = value;
-        card.textContent = "?";
+        // Initially, show the card back
+        card.innerHTML = `<img src="images/bg.png" alt="Card Back">`;
+        
         card.addEventListener("click", function() {
+          // Flip card if not already flipped and less than 3 cards are flipped
           if (
             !this.classList.contains("flipped") &&
             gameBoard.querySelectorAll(".flipped").length < 3
           ) {
             this.classList.add("flipped");
-            this.textContent = this.dataset.value;
+            // Show the card face image when flipped
+            this.innerHTML = `<img src="images/${this.dataset.value}.png" alt="Card Face">`;
+            
             const flippedCards = gameBoard.querySelectorAll(".flipped");
             if (flippedCards.length === 3) {
               setTimeout(() => {
                 checkMatch(Array.from(flippedCards));
-                flippedCards.forEach(card => card.classList.remove("flipped"));
+                flippedCards.forEach(card => {
+                  card.classList.remove("flipped");
+                  // Reset card back if not matched
+                  if (card.style.visibility !== "hidden") {
+                    card.innerHTML = `<img src="images/bg.png" alt="Card Back">`;
+                  }
+                });
               }, 500);
             }
           }
         });
+        
         gameBoard.appendChild(card);
       });
     }
@@ -121,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
         card2.dataset.value === card3.dataset.value
       ) {
         matches++;
-        cards.forEach(card => card.style.visibility = "hidden");
+        cards.forEach(card => (card.style.visibility = "hidden"));
         updateScore();
         checkWinCondition();
       } else {
         cards.forEach(card => {
           card.classList.remove("flipped");
-          card.textContent = "?";
+          card.innerHTML = `<img src="images/card-back.png" alt="Card Back">`;
         });
       }
     }
@@ -188,6 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     // Event listeners
+  
+    // Single player mode: hide multiplayer scores and show single-player score
     singlePlayerBtn.addEventListener("click", () => {
       isMultiplayer = false;
       resetGame();
@@ -196,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
     });
   
+    // Multiplayer mode: hide single-player score and show multiplayer scores with turn highlighting
     multiplayerBtn.addEventListener("click", () => {
       isMultiplayer = true;
       resetGame();
@@ -206,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startGame();
     });
   
+    // Navigation buttons
     backHomeBtn.addEventListener("click", () => {
       resetGame();
       showScreen(homeScreen);
@@ -217,21 +255,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
     nextLevelBtn.addEventListener("click", () => {
-        if (level < 5) {
-          level++;
-          levelDisplay.textContent = level;
-          generateCards(level);
-          startTimer();
-          showScreen(gameScreen);
-        } else {
-          // When level 5 is completed, display a final message
-          clearInterval(timer);
-          winMessage.innerText = isMultiplayer
-            ? (player1Score > player2Score ? "🏆 Player 1 Wins the Game!" : "🏆 Player 2 Wins the Game!")
-            : "🎉 Congratulations! You Completed All 5 Levels!";
-          showScreen(winScreen);
-        }
-      });
-      
+      if (level < 5) {
+        level++;
+        levelDisplay.textContent = level;
+        generateCards(level);
+        startTimer();
+        showScreen(gameScreen);
+      } else {
+        clearInterval(timer);
+        winMessage.innerText = isMultiplayer
+          ? (player1Score > player2Score ? "🏆 Player 1 Wins the Game!" : "🏆 Player 2 Wins the Game!")
+          : "🎉 Congratulations! You Completed All 5 Levels!";
+        showScreen(winScreen);
+      }
+    });
   });
   
