@@ -61,7 +61,7 @@
     background-color: rgb(59, 168, 143);
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.9s ease;
+    transition: transform 0.3s ease;
     width: 100%;
     aspect-ratio: 1 / 1;  /* square cards */
     overflow: hidden;
