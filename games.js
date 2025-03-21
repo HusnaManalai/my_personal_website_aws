@@ -3,11 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeScreen = document.getElementById("home-screen");
     const gameScreen = document.getElementById("game-screen");
     const winScreen = document.getElementById("win-screen");
+    const loseScreen = document.getElementById("lose-screen");
   
     const singlePlayerBtn = document.getElementById("single-player-btn");
     const multiplayerBtn = document.getElementById("multiplayer-btn");
-    const backHomeBtn = document.getElementById("back-home-btn");
-    const winHomeBtn = document.getElementById("home-btn"); // from win screen
+    // For navigation from win screen, use a unique ID (assumed in HTML to be "home-btn")
+    const winHomeBtn = document.getElementById("home-btn");
+    // For the lose screen, assume the home button has an ID "lose-back-home-btn"
+    const loseHomeBtn = document.getElementById("lose-back-home-btn");
     const nextLevelBtn = document.getElementById("next-level-btn");
   
     const gameBoard = document.getElementById("game-board");
@@ -28,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bgMusic.loop = true;
     bgMusic.volume = 0.5;
     
-    let isMusicPlaying = false; // our own flag
+    let isMusicPlaying = false;
     
     musicToggleBtn.addEventListener("click", () => {
       if (!isMusicPlaying) {
@@ -42,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
     
-  
     // Game variables
     let level = 1;
     let matches = 0;
@@ -52,13 +54,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let player2Score = 0;
     let timer;
     let timeLeft = 60;
-  
+    
     // Utility: switch visible screen
     function showScreen(screen) {
-      [homeScreen, gameScreen, winScreen].forEach(s => s.classList.add("hidden"));
+      // Hide all screens
+      [homeScreen, gameScreen, winScreen, loseScreen].forEach(s => s.classList.add("hidden"));
       screen.classList.remove("hidden");
+      
+      // When showing winScreen, control the Next Level button display:
+      if (screen === winScreen) {
+        // If winMessage indicates failure, hide the Next Level button.
+        if (winMessage.innerText.includes("Failed")) {
+          nextLevelBtn.style.display = "none";
+        } else {
+          nextLevelBtn.style.display = "block";
+        }
+      }
     }
-  
+    
     // Reset game state and clear timer
     function resetGame() {
       level = 1;
@@ -66,32 +79,35 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPlayer = 1;
       player1Score = 0;
       player2Score = 0;
-      if (isMultiplayer) {
-        player1ScoreDisplay.textContent = "0";
-        player2ScoreDisplay.textContent = "0";
-      } else {
-        singlePlayerScore.textContent = "0";
-      }
+      // Reset scores regardless of mode:
+      singlePlayerScore.textContent = "0";
+      player1ScoreDisplay.textContent = "0";
+      player2ScoreDisplay.textContent = "0";
       levelDisplay.textContent = "1";
       clearInterval(timer);
     }
-  
+    
     // Start countdown timer
     function startTimer() {
       clearInterval(timer);
       timeLeft = 20;
       timerDisplay.textContent = timeLeft;
+      
       timer = setInterval(() => {
         timeLeft--;
         timerDisplay.textContent = timeLeft;
+    
         if (timeLeft <= 0) {
           clearInterval(timer);
           winMessage.innerText = "⏳ Time's Up! You Failed!";
-          showScreen(winScreen);
+          // Hide Next Level button on loss
+          nextLevelBtn.style.display = "none";
+          // Show lose screen instead of win screen
+          showScreen(loseScreen);
         }
       }, 1000);
     }
-  
+    
     // Generate game cards for the current level
     function generateCards(level) {
       matches = 0;
@@ -106,25 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
       cardValues.sort(() => Math.random() - 0.5);
       
       gameBoard.innerHTML = "";
-      // Dynamically adjust the number of columns based on card count:
+      // Dynamically adjust grid columns:
       gameBoard.style.gridTemplateColumns = `repeat(${Math.ceil(numCards / 3)}, 1fr)`;
-  
+    
       cardValues.forEach(value => {
         const card = document.createElement("div");
         card.classList.add("card");
-        // Store the card face image path in dataset
+        // Store the card face image value in dataset
         card.dataset.value = value;
-        // Initially, show the card back
+        // Initially show card back
         card.innerHTML = `<img src="images/bg.png" alt="Card Back">`;
         
         card.addEventListener("click", function() {
-          // Flip card if not already flipped and less than 3 cards are flipped
+          // Only flip if not already flipped and fewer than 3 cards flipped:
           if (
             !this.classList.contains("flipped") &&
             gameBoard.querySelectorAll(".flipped").length < 3
           ) {
             this.classList.add("flipped");
-            // Show the card face image when flipped
+            // Show card face image when flipped
             this.innerHTML = `<img src="images/${this.dataset.value}.png" alt="Card Face">`;
             
             const flippedCards = gameBoard.querySelectorAll(".flipped");
@@ -133,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkMatch(Array.from(flippedCards));
                 flippedCards.forEach(card => {
                   card.classList.remove("flipped");
-                  // Reset card back if not matched
+                  // Reset card if not matched
                   if (card.style.visibility !== "hidden") {
                     card.innerHTML = `<img src="images/bg.png" alt="Card Back">`;
                   }
@@ -146,8 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gameBoard.appendChild(card);
       });
     }
-  
-    // Check if the three flipped cards match
+    
+    // Check if three flipped cards match
     function checkMatch(cards) {
       const [card1, card2, card3] = cards;
       if (
@@ -165,20 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-  
-    // Update turn indicator for multiplayer mode
-    function updateTurnIndicator() {
-      if (!isMultiplayer) return;
-      if (currentPlayer === 1) {
-        player1Name.style.fontWeight = "bold";
-        player2Name.style.fontWeight = "normal";
-      } else {
-        player1Name.style.fontWeight = "normal";
-        player2Name.style.fontWeight = "bold";
-      }
-    }
-  
-    // Update score based on game mode
+    
+    // Update score (for now, single-player mode only)
     function updateScore() {
       if (isMultiplayer) {
         if (currentPlayer === 1) {
@@ -195,7 +199,19 @@ document.addEventListener("DOMContentLoaded", () => {
         singlePlayerScore.textContent = currentScore + 1;
       }
     }
-  
+    
+    // Update turn indicator for multiplayer mode
+    function updateTurnIndicator() {
+      if (!isMultiplayer) return;
+      if (currentPlayer === 1) {
+        player1Name.style.fontWeight = "bold";
+        player2Name.style.fontWeight = "normal";
+      } else {
+        player1Name.style.fontWeight = "normal";
+        player2Name.style.fontWeight = "bold";
+      }
+    }
+    
     // Check win condition for current level
     function checkWinCondition() {
       if (matches >= (level + 2)) {
@@ -208,7 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showScreen(winScreen);
       }
     }
-  
+    
     // Start game: generate cards, start timer, and show game screen
     function startGame() {
       levelDisplay.textContent = level;
@@ -220,10 +236,10 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTurnIndicator();
       }
     }
-  
+    
     // Event listeners
-  
-    // Single player mode: hide multiplayer scores and show single-player score
+    
+    // Single-player mode
     singlePlayerBtn.addEventListener("click", () => {
       isMultiplayer = false;
       resetGame();
@@ -231,8 +247,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("score-display").style.display = "block";
       startGame();
     });
-  
-    // Multiplayer mode: hide single-player score and show multiplayer scores with turn highlighting
+    
+    // Multiplayer mode
     multiplayerBtn.addEventListener("click", () => {
       isMultiplayer = true;
       resetGame();
@@ -242,18 +258,21 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTurnIndicator();
       startGame();
     });
-  
+    
     // Navigation buttons
-    backHomeBtn.addEventListener("click", () => {
-      resetGame();
-      showScreen(homeScreen);
-    });
-  
+    // Home button from win screen
     winHomeBtn.addEventListener("click", () => {
       resetGame();
       showScreen(homeScreen);
     });
-  
+    
+    // Home button from lose screen
+    loseHomeBtn.addEventListener("click", () => {
+      resetGame();
+      showScreen(homeScreen);
+    });
+    
+    // Next Level button (only works when player wins)
     nextLevelBtn.addEventListener("click", () => {
       if (level < 5) {
         level++;
@@ -263,9 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
         showScreen(gameScreen);
       } else {
         clearInterval(timer);
-        winMessage.innerText = isMultiplayer
-          ? (player1Score > player2Score ? "🏆 Player 1 Wins the Game!" : "🏆 Player 2 Wins the Game!")
-          : "🎉 Congratulations! You Completed All 5 Levels!";
+        winMessage.innerText = "🎉 Congratulations! You Completed All 5 Levels!";
+        nextLevelBtn.style.display = "none";
         showScreen(winScreen);
       }
     });
