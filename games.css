@@ -1,6 +1,5 @@
 /* GAMES SECTION (MASONRY LAYOUT) */
 .game-section1 {
-    
     background-image: url('images/22e.png');
     background-size: 99% 99%;
     background-position: center;
@@ -15,11 +14,10 @@
     width: 90%;
     max-width: 900px;
     padding: 10px;
-    color : white;
-
+    color: white;
   }
-
-  .game-section1 h2{
+  
+  .game-section1 h2 {
     color: white;
   }
   
@@ -27,6 +25,7 @@
   .game-screen {
     width: 100%;
   }
+  
   /* Game Container: Centered and sized to fit its content */
   .game-container {
     display: flex;
@@ -111,7 +110,7 @@
   #multiplayer-score {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    padding: 1rem;  /* Adjusted padding for a smaller look */
+    padding: 1rem;
   }
   
   /* Buttons */
@@ -134,5 +133,44 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    /* Stack game board and info vertically on tablets */
+    .game-container {
+      flex-direction: column;
+    }
+    .game-board {
+      max-width: 90%;
+      padding: 1.5rem;
+    }
+    .game-info {
+      width: 90%;
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* Further adjustments for smaller phones */
+    .game-section1 {
+      margin-top: 50px;
+      padding: 5px;
+    }
+    .game-info h2 {
+      font-size: 1.5rem;
+    }
+    #timer {
+      font-size: 1rem;
+    }
+    #score-display,
+    #multiplayer-score {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+    button {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
   }
   
