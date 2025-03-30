@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       // Shuffle cards
       cardValues.sort(() => Math.random() - 0.5);
+
+      
       
       gameBoard.innerHTML = "";
       // Dynamically adjust grid columns:
