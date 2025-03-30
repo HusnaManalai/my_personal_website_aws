@@ -17,14 +17,17 @@
     color: white;
   }
   
+
   .game-section1 h2 {
     color: white;
   }
+  
   
   /* Game Screen */
   .game-screen {
     width: 100%;
   }
+  
   
   /* Game Container: Centered and sized to fit its content */
   .game-container {
