@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Start countdown timer
     function startTimer() {
       clearInterval(timer);
-      timeLeft = 20;
+      timeLeft = 2550;
       timerDisplay.textContent = timeLeft;
       
       timer = setInterval(() => {
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Shuffle cards
       cardValues.sort(() => Math.random() - 0.5);
 
-      
+
       
       gameBoard.innerHTML = "";
       // Dynamically adjust grid columns:
