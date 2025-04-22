@@ -207,7 +207,7 @@
     }
   }
   
-  
+
   
   /* -----------------------------------
      FOOTER STYLING
@@ -567,6 +567,83 @@
     .contact-form textarea,
     .contact-form button {
       font-size: 0.9rem;
+    }
+  }
+  
+
+  /* -------------------------------------------------
+  coding
+  *---------------------------------*/
+  
+  /* Projects Table Styling */
+section {
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  
+  /* Table container for subtle background effect */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  th {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+  }
+  
+  td {
+    background-color: rgba(255, 255, 255, 0.07);
+    transition: background-color 0.3s ease;
+  }
+  
+  tr:hover td {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  a {
+    color: #9fd3c7;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: #fcd5ce;
+  }
+  
+  /* Responsive text size */
+  @media screen and (max-width: 600px) {
+    th, td {
+      font-size: 0.9rem;
+      padding: 0.75rem;
+    }
+  
+    section h2 {
+      font-size: 1.5rem;
     }
   }
   
