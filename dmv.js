@@ -68,14 +68,14 @@ function checkPuzzle() {
   
     if (validTickets.includes(ticketInput)) {
       const zip = Math.floor(10000 + Math.random() * 89999); // 5-digit random ZIP
-      const mon = Math.floor(1 + Math.random() * 40)
+      const mon = Math.floor(10 + Math.random() * 89)
       result.innerHTML = "";
       let i = 0;
-      const zipStr = `Write this ZIP code on your ticket: ${zip}`;
-      const monStr = `This is the money you owe the DMV please Pay to Maggie: $ ${mon}`;
+      const zipStr = `Write this ZIP code on your ticket: ${zip}, you owe the DMV: $${mon}`;
 
       const interval = setInterval(() => {
         result.innerHTML += zipStr.charAt(i); 
+
 
         //the money 
         i++;
