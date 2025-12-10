@@ -1,8 +1,8 @@
 function generateStars() {
   const starsContainer = document.getElementById("stars-container");
-  if (!starsContainer) return; // Ensure the container exists
+  if (!starsContainer) return; 
 
-  const numStars = 40; // Adjust for more/less density
+  const numStars = 40; 
 
   for (let i = 0; i < numStars; i++) {
       let star = document.createElement("div");
@@ -12,12 +12,12 @@ function generateStars() {
       star.style.top = Math.random() * 100 + "vh";
       star.style.left = Math.random() * 100 + "vw";
 
-      // Random size (for variety)
-      let size = Math.random() * 2 + 1;
+      // Random size 
+      let size = Math.random() * 1 + 0.1;
       star.style.width = size + "px";
       star.style.height = size + "px";
 
-      // Random animation delay to stagger blinking effect
+      // Random animation delay 
       star.style.animationDelay = Math.random() * 4 + "s";
 
       starsContainer.appendChild(star);
