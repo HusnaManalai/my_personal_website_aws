@@ -5,10 +5,7 @@ body {
     height: 100vh;
     background-color: #1d3030;
     user-select: none; 
-    font-family: "Fira Code", "Flate", monospace;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+    font-family: "Impact", fantasy;
     color: #FFFAF0;
 }
 .container {
@@ -87,8 +84,9 @@ body {
     --border-time: 0.08s;
     --scale: 1em;
     font-size: var(--scale, 1em);
-    border-radius: 7px;
-    box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+
     contain: strict;
     background: radial-gradient(ellipse farthest-corner at right top, #feed9b 0%, #fedc98 8%, #efcc93 30%, #d4c697 40%, transparent 80%),
         radial-gradient(ellipse farthest-corner at left bottom, #ffffd5 0%, #ffffac 8%, #e8d9b1 25%, #deb49f 62.5%, #beb49f 100%);
@@ -106,7 +104,7 @@ body {
     height: 100%;  
     opacity: 1; 
     z-index: 1;
-    background: #ffffe2;
+    background: #FFFAF0;
 }
 
 /* Covers the gold background all of the time -- container for icons */
@@ -114,12 +112,15 @@ body {
     z-index: 2;
     border-radius: inherit;
     background: #FFFAF0;
+
     padding: 1em;
+
     position: absolute;
     top: var(--gold-rad);
     left: var(--gold-rad);
     bottom: var(--gold-rad);
     right: var(--gold-rad);
+
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -136,7 +137,7 @@ body {
 /* ----------- Sidebar Styles -------------- */
 #found {
     grid-area: quads;
-    border-left: 2px solid #ccc;
+    border-left: 2px solid #FFFAF0;
     padding: 10px 20px 0 20px;
     display: flex;
     flex-direction: column;
@@ -217,13 +218,6 @@ body {
     opacity: 0.2 !important;
 }
 
-/* On sidebar: when a quad is hovered over it'll be highlighted */
-
-#found .found-quad:hover {
-    transform: scale(1.035);
-    border-color: #ccc;
-
-}
 /* ........... Quad result animations ............ */
 
 /* A card can't be selected during one of these */
@@ -396,15 +390,104 @@ body {
 /* Small desktop displays */
 /* I'm going to assume that nobody in 2021 has a landscape display much smaller than this */
 /* No parenthesis in @media rules as far as I can tell :( */
-@media (min-aspect-ratio: 1/1) and (min-width: 850px) and (max-width: 1150px), (min-aspect-ratio: 1/1) and (max-height: 700px) {
-    #cards .card {
-        --scale: min(1.4vw, 2.2vh);
-    }
+/* Phones in PORTRAIT:
+   Sidebar moves UNDER the cards */
+/* ========= RESPONSIVE TUNING ========= */
 
-    #found .card {
-        --scale: min(0.5vw, 0.77vh);
-    }
-    #found {
-        padding: 5px 10px 0 10px;
-    }
+/* Desktop / laptop:
+   as the window gets smaller or shorter, shrink the whole board slightly.
+   Layout stays identical. */
+/* ========= RESPONSIVE TUNING ========= */
+
+/* Desktop / laptop:
+   as the window gets smaller or shorter, shrink the whole board slightly.
+   Layout stays identical. */
+@media (max-width: 1440px), (max-height: 900px) {
+  #cards .card {
+    --scale: 0.9em;
+  }
+  #found .card {
+    --scale: 0.32em;
+  }
 }
+
+@media (max-width: 1280px), (max-height: 820px) {
+  #cards .card {
+    --scale: 0.8em;
+  }
+  #found .card {
+    --scale: 0.28em;
+  }
+}
+
+@media (max-width: 1120px), (max-height: 760px) {
+  #cards .card {
+    --scale: 0.7em;
+  }
+  #found .card {
+    --scale: 0.24em;
+  }
+}
+
+/* Phones / small tablets in LANDSCAPE:
+   same side-by-side layout, just much smaller so everything fits. */
+@media (max-width: 900px) and (orientation: landscape) {
+  #cards .card {
+    --scale: 0.55em;
+  }
+  #found .card {
+    --scale: 0.20em;
+  }
+
+  body,
+  .container {
+    height: 100vh;
+    overflow: hidden; /* avoid scrolling if possible */
+  }
+}
+
+/* Phones in PORTRAIT:
+   - stack layout vertically
+   - sidebar (#found) goes UNDER the cards
+   - extra shrink so it fits on a tall, narrow screen */
+@media (max-width: 600px) and (orientation: portrait) {
+
+  .container {
+    grid-template:
+      "title"    auto
+      "subtitle" auto
+      "cards"    auto
+      "quads"    auto   /* #found below cards */
+      "buttons"  auto
+      / 1fr;
+
+    height: auto;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* shrink main cards */
+  #cards .card {
+    --scale: 0.55em;   /* tweak up/down if too big/small */
+  }
+
+  /* sidebar full width, no left border, thin top divider */
+  #found {
+    border-left: none;
+    border-top: 2px solid #FFFAF0;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0;
+  }
+
+  /* shrink found-quad cards further */
+  #found .card {
+    --scale: 0.22em;
+  }
+
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
