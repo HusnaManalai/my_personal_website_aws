@@ -9,6 +9,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    color: #FFFAF0;
 }
 .container {
     color: #FFFAF0;
@@ -29,21 +30,19 @@ body {
 }
 /* ----------- Header Styles ------------ */
 .title {
-    color: #FFFAF0;
     margin: auto 20px;
     text-align: center;
 }
 
 .subtitle {
     grid-area: subtitle;
-    color: #FFFAF0;
     margin: auto;
     text-align: center;
 }
 
 #congrats {
     grid-area: congrats;
-    color: #FFFAF0;    
+    color: ;    
     visibility: hidden;
     text-align: center;
 }
@@ -78,35 +77,26 @@ body {
 
     margin-left: 0.1em;
     margin-right: 0.1em;
-
     padding: 0;
-
     height: 16.0em;
     width: 15em;
-
     position: relative;
-
-    font-size: var(--scale, 1em);
-
-    contain: strict;
-}
-
-#cards .card {
     --gold-rad: 0.6vh;
     --hover-scale: 1.025;
     --transition-time: 0.15s;
     --border-time: 0.08s;
     --scale: 1em;
-
+    font-size: var(--scale, 1em);
     border-radius: 7px;
     box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
-
+    contain: strict;
     background: radial-gradient(ellipse farthest-corner at right top, #feed9b 0%, #fedc98 8%, #efcc93 30%, #d4c697 40%, transparent 80%),
         radial-gradient(ellipse farthest-corner at left bottom, #ffffd5 0%, #ffffac 8%, #e8d9b1 25%, #deb49f 62.5%, #beb49f 100%);
 }
 
+
 /* Covers up the gold background */
-#cards .card::before {
+.card::before {
     border-radius: inherit;
     content: "";
     position: absolute;
@@ -123,16 +113,13 @@ body {
 .card-inner {
     z-index: 2;
     border-radius: inherit;
-    background: ##FFFAF0;
-
+    background: #FFFAF0;
     padding: 1em;
-
     position: absolute;
     top: var(--gold-rad);
     left: var(--gold-rad);
     bottom: var(--gold-rad);
     right: var(--gold-rad);
-
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -148,7 +135,6 @@ body {
 
 /* ----------- Sidebar Styles -------------- */
 #found {
-    color: #FFFAF0;
     grid-area: quads;
     border-left: 2px solid #ccc;
     padding: 10px 20px 0 20px;
@@ -200,14 +186,13 @@ body {
     --transition-time: 0.07s;
     --border-time: 0s;
     --scale: 0.35em;
-    background: #FFFAF0;
 }
 
 #buttons {
     grid-area: buttons;
 }
 .finished #timer {
-    color: #FFFAF0;
+
 }
 
 /* ----------- Animations -------------- */
