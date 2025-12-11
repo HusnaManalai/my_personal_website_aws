@@ -1,184 +1,30 @@
-/* GAMES SECTION (MASONRY LAYOUT) */
-.game-section1 {
-    background-size: 99% 99%;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
-    text-align: center;
-    margin: 100px auto 0;
-    width: 90%;
-    max-width: 900px;
-    padding: 10px;
-    color: white;
+/* GAMES SECTION */
 
-    
+
+.menu {
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  color: white;
+
   }
   
 
-  .game-section1 h2 {
-    color: white;
-  }
-  
-  
-  /* Game Screen */
-  .game-screen{
-    width: 100%;
-    
-  }
-  
-  
-  /* Game Container: Centered and sized to fit its content */
-  .game-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    /* Remove full width so container shrinks to its content */
-    width: auto;
-  }
-  
-  /* Hide inactive screens */
-  .hidden {
-    display: none;
-  }
-  
-  /* Game Board - Smaller and centered */
-  .game-board {
-    display: grid;
-    gap: 10px;
-    max-width: 400px;  /* Reduced size */
-    padding: 2rem;     /* Reduced padding */
-    background-color: rgb(25, 22, 22);
-    border-radius: 10px;
-  }
-  
-  /* Cards - Responsive using aspect-ratio */
-  .card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;  /* Fallback font size */
-    font-weight: bold;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-  
-  .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .card.flipped {
-    transform: rotateY(180deg);
-  }
-  
-  /* Game Info Panel - Smaller and centered */
-  
-  .game-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;  /* Center inner content */
-    width: 250px;         /* Reduced width */
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;   /* Center text inside */
-  }
-  
-  /* Level Number */
-  .game-info h2 {
-    font-size: 2rem;
-    margin-bottom: 5px;
-    color: rgb(255, 255, 255);
-  }
+.menu h2 {
+  font-size: 20px;
+  text-align: left;
+  color: white;
+}
+
+.menu a {
+  color: pink;
+}
 
 
   
-  /* Timer */
-  #timer {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: rgb(255, 200, 48);
-  }
   
-  /* Score Displays */
-  #score-display,
-  #multiplayer-score {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    padding: 1rem;
-  }
-  
-  /* Buttons */
-  button {
-    background: rgb(59, 168, 143);
-    color: white;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  button:hover {
-    background: #358773;
-  }
-  
-  .button-container {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    /* Stack game board and info vertically on tablets */
-    .game-container {
-      flex-direction: column;
-    }
-    .game-board {
-      max-width: 90%;
-      padding: 1.5rem;
-    }
-    .game-info {
-      width: 90%;
-      margin-top: 1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    /* Further adjustments for smaller phones */
-    .game-section1 {
-      margin-top: 50px;
-      padding: 5px;
-    }
-    .game-info h2 {
-      font-size: 1.5rem;
-    }
-    #timer {
-      font-size: 1rem;
-    }
-    #score-display,
-    #multiplayer-score {
-      font-size: 1rem;
-      padding: 0.5rem;
-    }
-    button {
-      padding: 8px 12px;
-      font-size: 0.9rem;
-    }
-  }
+
   

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="tricatch.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1 class="logo"><a href="games.html">GAMES</a></h1>
+  </header>
+
+  <!-- Games Section-->
+  <section class="game-section1" id="game-1">
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen">
+      <h2>Tri-Catch</h2>
+      <button id="single-player-btn">Start Game</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden">
+      <div class="game-container">
+        <!-- Game Board (LEFT) -->
+        <div class="game-board" id="game-board"></div>
+        <!-- Game Info Panel (RIGHT) -->
+        <div class="game-info" id="game-info">
+          <h2>Level <span id="level">1</span></h2>
+          <p id="timer">Time Left: <span id="time-left">60</span></p>
+          <!-- Single-player score container -->
+          <div id="score-display">
+            <p>Score: <span id="score">0</span></p>
+          </div>
+          <button class="home-btn">Back to Home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Win Screen -->
+    <div id="win-screen" class="screen hidden">
+      <h2 id="win-message"></h2>
+      <div class="button-container">  
+        <button class="home-btn">Home</button>
+        <button id="next-level-btn">Next Level</button>
+      </div> 
+    </div>
+
+    <!-- Lose Screen -->
+    <div id="lose-screen" class="screen hidden">
+      <h2 id="lose-message">Failure</h2>
+      <div class="button-container">
+        <button class="home-btn">Home</button>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Scripts -->
+  <script src="tricatch.js"></script>
+</body>
+
+</html>
